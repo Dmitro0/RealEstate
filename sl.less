@@ -1,0 +1,20 @@
+@count: 3;
+@total: 100%;
+@dark: 70%;
+
+@keyframes changeBackground {
+  @step: @total/@count {
+    background-image: url(./images/main.png);
+  }
+  @step: @total/@count,@step: @total/@count*2 {
+    background-image: url(./images/main2.png);
+    filter: brightness(@dark);
+  }
+  @step:@total/@count*2, @step:@total/@count*3 {
+    background-image: url(./images/main3.png);
+    filter: brightness(@dark);
+  }
+  @total {
+    background-image: url(./images/main.png);
+  }
+}
