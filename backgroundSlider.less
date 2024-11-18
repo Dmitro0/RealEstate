@@ -1,0 +1,55 @@
+//lessc --v
+//npm install -g less
+
+@dark: "70%";
+@duration: 30;
+@gap: 3;
+
+@count: 1;
+@total_images: 3;
+
+@timeOfAnimation: @total_images * 10;
+
+.main-bodyTop::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  animation: ChangeBackground ~"@{timeOfAnimation}s" infinite;
+  transition: background-image 0.5s ease;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+@keyframes ChangeBackground {
+  .slider-animation(@count) when (@count <= @total_images) {
+    @start: (@count - 1) * (@duration + @gap);
+    @end: @start + @duration;
+
+    @start_str: ~"@{start}%";
+    @end_str: ~"@{end}%";
+
+    @{start_str}, @{end_str} {
+      background-image: url(~"./images/main@{count}.png");
+      filter: brightness(if(@count = 1, "100%", @dark));
+    }
+    
+
+      .slider-animation(@count + 1);
+    }
+    .slider-animation(@count);
+
+    99%, 100% {
+      background-image: url(~"./images/main1.png");
+      filter: brightness(100%);
+    }
+
+}
+
+
+
+
+
+
+
