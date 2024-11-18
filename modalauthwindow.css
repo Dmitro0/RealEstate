@@ -1,0 +1,118 @@
+.main-body.body--blur, .header.body--blur {
+    filter: blur(1px) brightness(0.5);
+    transition: filter 300ms ease-out;
+}
+
+.auth-modal {
+    position: fixed;
+    padding: 10px 20px;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transform: translate(-50%, -100%) scale(0.5);
+    opacity: 0;
+    z-index: -1;
+    transition: transform 300ms ease-out, opacity 300ms ease-out;
+}
+
+.auth-modal[style*="z-index: 9999"] {
+    transform: translate(-50%, -80%) scale(1);
+    opacity: 1;
+}
+
+.auth-modal-content > * {
+    margin: 10px 0;
+}
+.auth-modal-content h2{
+    color: #333;
+    font-size: 20px;
+    font-weight: 750;
+    margin-left: 10px;
+}
+.auth-modal-content .close img {
+    width: 20px;
+    height: 20px;
+    transition: 100ms;
+}
+.auth-modal-content .close:hover {
+    scale: 1.1;
+    cursor: pointer;
+    transition: 100ms;
+    filter: invert(14%) sepia(97%) saturate(7483%) hue-rotate(359deg) brightness(97%) contrast(116%);
+}
+.auth-form > * {
+    margin: 10px 0;
+}
+.auth-form {
+    display: block;
+}
+.auth-form label {
+    text-align: left;
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+.auth-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+.auth-form input:focus {
+    border-color: #39c568;
+    box-shadow: 0 0 0 2px rgba(57, 197, 104, 0.1);
+}
+.button-container {
+    text-align: center;
+}
+.auth-form-button {
+    cursor: pointer;
+    background-color: #39c568;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 40px;
+    font-size: 15px;
+    transition: 100ms;
+    margin-bottom: 10px;
+}
+.auth-form-button:hover {
+    background-color: #53ff8d;
+    scale: 1.02;
+    transition: 100ms;
+}
+a.auth-form-register {
+    color: #b3b3b3;
+    text-decoration: none;
+    transition: 100ms;
+}
+a.auth-form-register:hover {
+    color: #278de0;
+    transition: 100ms;
+}
+.close {
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.error-message-login, .error-message-password {
+    position: absolute;
+    color: red;
+    font-size: 12px;
+}
+.error-message-login {
+    top: 115px;
+    right: 20px;
+}
+.error-message-password {
+    top: 195px;
+    right: 20px;
+}
