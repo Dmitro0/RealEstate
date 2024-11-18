@@ -32,10 +32,10 @@
               </div>
 
 
-              <div id="authModal" class="auth-modal">
+              <div id="authModal" class="modalWindow">
                 <div class="auth-modal-content">
                   <span class="close" onclick="toggleAuthModal()"><img src="images/close.png"></span>
-                  <h2>Авторизация</h2>
+                  <h2 id = "nameOfModalWindow">Авторизация</h2>
                   <form class="auth-form" method="post">
                     <label for="login">Имя пользователя</label>
                     <input type="text" id="login" placeholder="Введите логин" required>
@@ -45,10 +45,32 @@
                     <span class="error-message-password" id="password-error"></span>
                     <div class="button-container">
                       <div class="auth-form-button" id = "submit-button" type="submit">Войти</div>
-                      <a class="auth-form-register" href="#">Зарегистрироваться</a>
+                      <a class="auth-form-register" href="#" onclick = "toggleRegistrationModal()">Зарегистрироваться</a>
                     </div>
                   </form>
                 </div>
+              </div>
+
+                <div id="registrationModal" class="modalWindow">
+                  <div class="auth-modal-content">
+                    <span class="close" onclick="closeRegistrationModal()"><img src="images/close.png"></span>
+                    <h2 id = "nameOfModalWindow">Регистрация</h2>
+                    <form class="auth-form" method="post">
+                      <label for="reg-login">Имя пользователя</label>
+                      <input type="text" id="reg-login" placeholder="Введите логин" required>
+                      <span class="error-message-login" id="reg-login-error"></span>
+                      <label for="reg-password">Пароль</label>
+                      <input type="password" id="reg-password" placeholder="Введите пароль" required>
+                      <span class="error-message-password" id="reg-password-error"></span>
+                      <label for="repeat-password">Повторите пароль</label>
+                      <input type="password" id="repeat-password" placeholder="Повторите пароль" required>
+                      <span class="error-message-password" id="reg-repeat-password-error"></span>
+                      <div class="button-container">
+                        <div class="auth-form-button" id = "registration-button" type="submit">Зарегистрироваться</div>
+                        <a class="auth-form-register" href="#" onclick = "toggleRegistrationModal()">Уже есть аккаунт? Войти.</a>
+                      </div>
+                    </form>
+                  </div>
 
               </div>
             </li>
@@ -336,7 +358,9 @@
     </div>
     </footer>
   <script src="scriptsJS/modalAuthWindow.js"></script>
-  <script src="scriptsJS/formValidate.js"></script>
+  <script src="scriptsJS/modalRegWindow.js"></script>
+  <script src="scriptsJS/authFormValidate.js"></script>
+  <script src="scriptsJS/regFormValidate.js"
   <script src="scriptsJS/sliderMain.js"></script>
   </body>
 </html>

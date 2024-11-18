@@ -2,57 +2,56 @@ $(document).ready(function() {
     const $login = $('#login');
     const $password = $('#password');
 
+
     $('#login-error').hide();
     $('#password-error').hide();
     let usernameError = true;
     $('#login').keyup(function() {
-        validateUsername();
+        validateUsername($login, '#login-error');
     });
 
-    function validateUsername() {
-        // Валидация логина
-        if (!$login.val().trim()) {
+    function validateUsername(username, errorField) {
+
+        if (!username.val().trim()) {
             usernameError = false;
-            $('#login-error').text('Введите логин').show();
-            $login.css('border-color', 'red');
-        } else if ($login.val().length < 4) {
+            $(errorField).text('Введите логин').show();
+            username.css('border-color', 'red');
+        } else if (username.val().length < 4) {
             usernameError = false;
-            $('#login-error').text('Логин должен содержать минимум 4 символа').show();
-            $login.css('border-color', 'red');
+            $(errorField).text('Логин должен содержать минимум 4 символа').show();
+            username.css('border-color', 'red');
         } else {
             usernameError = true;
-            $('#login-error').hide();
-            $login.css('border-color', '');
+            $(errorField).hide();
+            username.css('border-color', '');
         }
     }
 
     let passwordError = true;
     $('#password').keyup(function() {
-        validatePassword();
+        validatePassword($password);
     });
 
-    function validatePassword() {   
-        // Валидация пароля
-        if (!$password.val()) {
+    function validatePassword(passwd) {   
+
+        if (!passwd.val()) {
             passwordError = false;
             $('#password-error').text('Введите пароль').show();
-            $password.css('border-color', 'red');
-        } else if ($password.val().length < 6) {
+            passwd.css('border-color', 'red');
+        } else if (passwd.val().length < 6) {
             passwordError = false;
             $('#password-error').text('Пароль должен содержать минимум 6 символов').show();
-            $password.css('border-color', 'red');
+            passwd.css('border-color', 'red');
         } else {
             passwordError = true;
             $('#password-error').hide();
-            $password.css('border-color', '');
+            passwd.css('border-color', '');
         }
     }
 
-    // Сброс стилей при вводе
     $login.on('input', function() {
         $(this).css('border-color', '');
     });
-
     $password.on('input', function() {
         $(this).css('border-color', '');
     });

@@ -3,7 +3,7 @@
     transition: filter 300ms ease-out;
 }
 
-.auth-modal {
+.modalWindow{
     position: fixed;
     padding: 10px 20px;
     top: 50%;
@@ -18,21 +18,26 @@
     transition: transform 300ms ease-out, opacity 300ms ease-out;
 }
 
-.auth-modal[style*="z-index: 9999"] {
+
+.modalWindow[style*="z-index: 9999"] {
     transform: translate(-50%, -80%) scale(1);
     opacity: 1;
 }
+#registrationModal[style*="z-index: 9999"]{
+    transform: translate(-50%, -70%) scale(1);
+    opacity: 1;
+}
 
-.auth-modal-content > * {
+.modalWindow > * {
     margin: 10px 0;
 }
-.auth-modal-content h2{
+.modalWindow h2{
     color: #333;
     font-size: 20px;
     font-weight: 750;
     margin-left: 10px;
 }
-.auth-modal-content .close img {
+.modalWindow .close img {
     width: 20px;
     height: 20px;
     transition: 100ms;
@@ -43,7 +48,7 @@
     transition: 100ms;
     filter: invert(14%) sepia(97%) saturate(7483%) hue-rotate(359deg) brightness(97%) contrast(116%);
 }
-.auth-form > * {
+.auth-modal-content > * {
     margin: 10px 0;
 }
 .auth-form {
@@ -52,6 +57,8 @@
 .auth-form label {
     text-align: left;
     margin-left: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     font-size: 14px;
     font-weight: 500;
     color: #333;
@@ -59,7 +66,7 @@
 .auth-form input {
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    margin: 5px 0px 10px 0px;
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
@@ -79,6 +86,7 @@
     padding: 10px 40px;
     font-size: 15px;
     transition: 100ms;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 .auth-form-button:hover {
@@ -109,10 +117,16 @@ a.auth-form-register:hover {
     font-size: 12px;
 }
 .error-message-login {
-    top: 115px;
+    top: 120px;
     right: 20px;
 }
 .error-message-password {
     top: 195px;
     right: 20px;
 }
+
+#reg-repeat-password-error{
+    top: 270px;
+    right: 20px;
+}
+
