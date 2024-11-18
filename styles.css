@@ -166,38 +166,6 @@ body {
   overflow: hidden;
 }
 
-.main-bodyTop::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  animation: changeBackground 30s infinite;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
-  transition: background-image 0.5s ease;
-}
-
-@keyframes changeBackground {
-  0%, 30% {
-    background-image: url(./images/main.png);
-  }
-  33%, 63% {
-    background-image: url(./images/main2.png);
-    filter: brightness(70%);
-  }
-  66%, 96% {
-    background-image: url(./images/main3.png);
-    filter: brightness(70%);
-  }
-  100% {
-    background-image: url(./images/main.png);
-  }
-}
-
 
 .main-bodyTop .intro_title{
   font-size: 32px;
