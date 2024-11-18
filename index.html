@@ -59,12 +59,20 @@
                       <label for="reg-login">Имя пользователя</label>
                       <input type="text" id="reg-login" placeholder="Введите логин" required>
                       <span class="error-message-login" id="reg-login-error"></span>
+
+                      <label for="email">E-mail</label>
+                      <input type="text" id="email" placeholder="Введите e-mail" required>
+                      <span class="error-message-email" id="error-message-email"></span>
+
                       <label for="reg-password">Пароль</label>
                       <input type="password" id="reg-password" placeholder="Введите пароль" required>
                       <span class="error-message-password" id="reg-password-error"></span>
+                      
                       <label for="repeat-password">Повторите пароль</label>
                       <input type="password" id="repeat-password" placeholder="Повторите пароль" required>
                       <span class="error-message-password" id="reg-repeat-password-error"></span>
+
+
                       <div class="button-container">
                         <div class="auth-form-button" id = "registration-button" type="submit">Зарегистрироваться</div>
                         <a class="auth-form-register" href="#" onclick = "toggleRegistrationModal()">Уже есть аккаунт? Войти.</a>

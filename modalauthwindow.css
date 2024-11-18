@@ -111,7 +111,7 @@ a.auth-form-register:hover {
     right: 10px;
 }
 
-.error-message-login, .error-message-password {
+.error-message-login, .error-message-password, .error-message-email {
     position: absolute;
     color: red;
     font-size: 12px;
@@ -121,12 +121,16 @@ a.auth-form-register:hover {
     right: 20px;
 }
 .error-message-password {
+    top: 270px;
+    right: 20px;
+}
+.error-message-email{
     top: 195px;
     right: 20px;
 }
 
 #reg-repeat-password-error{
-    top: 270px;
+    top: 345px;
     right: 20px;
 }
 

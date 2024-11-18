@@ -4,11 +4,13 @@ $(document).ready(function() {
     const $registration_login = $('#reg-login');
     const $registration_password =  $('#reg-password');
     const $repeated_password = $('#repeat-password');
+    const $email = $('#email');
 
 
     $('#reg-login-error').hide();
     $('#reg-password-error').hide();
     $('#reg-repeat-password-error').hide();
+    $('#error-message-email').hide();
 
 
     let usernameError = true;
@@ -88,6 +90,30 @@ $(document).ready(function() {
         }
     }
 
+    let emailError = true;
+    $('#email').keyup(function(){
+        validateEmail();
+    });
+
+    function validateEmail(){
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+        if(!$email.val()){
+            emailError = false;
+            $('#error-message-email').text('E-mail не может быть пустым').show();
+            $email.css('border-color', 'red');
+        } else if(!emailPattern.test($email.val())){
+           emailError = false;
+           $('#error-message-email').text('E-mail не соответствует стандартному формату').show();
+           $email.css('border-color', 'red');
+        }
+        else{
+            emailError = true;
+            $('#error-message-email').hide();
+            $email.css('border-color', '');
+        }
+    }
+
     $registration_login.on('input', function() {
         $(this).css('border-color', '');
     });
@@ -100,12 +126,17 @@ $(document).ready(function() {
         $(this).css('border-color', '');
     });
 
+    $email.on('input', function() {
+        $(this).css('border-color', '');
+    })
+
     $('#registration-button').click(function(){
         validateUsername($registration_login, '#reg-login-error');
         validateRegistrationPassword($registration_password);
         validateRepeatPassword($registration_password, $repeated_password);
+        validateEmail();
 
-        if(usernameError && registrationPasswdError && repeatPasswordError){
+        if(usernameError && registrationPasswdError && repeatPasswordError && emailError){
             console.log('Регистрационная форма валидна');
         } else{
             alert('Проверьте правильность введенных данных');
