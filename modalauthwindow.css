@@ -17,6 +17,17 @@
     z-index: -1;
     transition: transform 300ms ease-out, opacity 300ms ease-out;
 }
+.userModalWindow{
+    position: absolute;
+    padding: 10px 20px;
+    top: 32px;
+    right: 195px;
+    width: 100px;
+    z-index: -1;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
 
 
 .modalWindow[style*="z-index: 9999"] {
@@ -28,6 +39,20 @@
     opacity: 1;
 }
 
+.logout-button{
+    cursor: pointer;
+    background-color: #39c568;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 12px;
+    transition: 100ms;
+}
+.logout-button:hover{
+    background-color: #ff5353;
+    scale: 1.02;
+    transition: 100ms;
+}
 .modalWindow > * {
     margin: 10px 0;
 }
@@ -37,7 +62,7 @@
     font-weight: 750;
     margin-left: 10px;
 }
-.modalWindow .close img {
+.modalWindow .close img, .userModalWindow .close img {
     width: 20px;
     height: 20px;
     transition: 100ms;
@@ -111,7 +136,7 @@ a.auth-form-register:hover {
     right: 10px;
 }
 
-.error-message-login, .error-message-password, .error-message-email {
+.error-message-login, .error-message-password, .error-message-email, .error-message-login-password {
     position: absolute;
     color: red;
     font-size: 12px;
@@ -124,6 +149,10 @@ a.auth-form-register:hover {
     top: 270px;
     right: 20px;
 }
+.error-message-login-password {
+    top: 195px;
+    right: 20px;
+}
 .error-message-email{
     top: 195px;
     right: 20px;
@@ -132,5 +161,29 @@ a.auth-form-register:hover {
 #reg-repeat-password-error{
     top: 345px;
     right: 20px;
+}
+
+.success-message-registration{
+    color: green;
+    display: block;
+    position: relative;
+    align-items: center;
+    text-align: center;
+}
+.error-message-registration{
+    color: red;
+    display: block;
+    position: relative;
+    align-items: center;
+    text-align: center;
+}
+.error-message-auth{
+    color: red;
+    font-size: 14px;
+    align-items: center;
+    text-align: center;
+}
+.success-message-registration.display-none, .error-message-registration.display-none, .error-message-auth.display-none{
+    display: none;
 }
 

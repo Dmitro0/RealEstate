@@ -138,6 +138,34 @@ $(document).ready(function() {
 
         if(usernameError && registrationPasswdError && repeatPasswordError && emailError){
             console.log('Регистрационная форма валидна');
+            const login = document.getElementById('reg-login').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('reg-password').value;
+            $.ajax({
+                url: 'src/registration.php',
+                method: 'POST',
+                data: {
+                    'reg-login': login,
+                    'email': email,
+                    'reg-password': password,
+                },
+                success: function(response) {
+                    if (response.trim() === 'success') {
+                        console.log("Регистрация прошла успешно");
+                        document.getElementById('registration-success').classList.remove('display-none');
+                        document.getElementById('registration-error').classList.add('display-none');
+                        document.getElementById('registration-form').reset();
+                        
+                    } else {
+                        console.log("Ошибка регистрации");
+                        document.getElementById('registration-error').classList.remove('display-none');
+                        document.getElementById('registration-success').classList.add('display-none');
+                    }
+                },
+                error: function() {
+                    alert('Произошла ошибка при отправке данных');
+                }
+            });
         } else{
             alert('Проверьте правильность введенных данных');
             return false;

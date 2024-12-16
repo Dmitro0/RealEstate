@@ -1,3 +1,8 @@
+<?php
+require_once 'src/boot.php';
+$auth = checkAuth();
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -22,14 +27,26 @@
           </div>
 
           <ul class="header-menu-up">
-            <li class="item"><a href="index.html">Услуги</a></li>
-            <li class="item"><a href="index.html">О компании</a></li>
-            <li class="item"><a href="index.html">Контакты</a></li>
+            <li class="item"><a href="index.php">Услуги</a></li>
+            <li class="item"><a href="index.php">О компании</a></li>
+            <li class="item"><a href="index.php">Контакты</a></li>
             <li>
-              
-              <div class="user" onclick="toggleAuthModal()">
-                <img src="images/user.png" alt="Профиль" />
-              </div>
+              <?php if ($auth): ?>
+                <div class="user" onclick="toggleUserModal()">
+                  <img src="images/user.png" alt="Профиль" />
+                  <span class="user-text" id="user-text"><?php echo $_SESSION['username']; ?></span>
+                </div>
+                <div id="userModal" class="userModalWindow">
+                  <div class="user-modal-content">
+                    <div class="logout-button" onclick="logout()">Выйти</div>
+                  </div>
+                </div>
+              <?php else: ?>
+                <div class="user" onclick="toggleAuthModal()">
+                  <span class="user-text" id="user-text"></span>
+                  <img src="images/user.png" alt="Профиль" />
+                </div>
+              <?php endif; ?>
 
 
               <div id="authModal" class="modalWindow">
@@ -38,11 +55,12 @@
                   <h2 id = "nameOfModalWindow">Авторизация</h2>
                   <form class="auth-form" method="post">
                     <label for="login">Имя пользователя</label>
-                    <input type="text" id="login" placeholder="Введите логин" required>
+                    <input type="text" id="login" name="login" placeholder="Введите логин" required>
                     <span class="error-message-login" id="login-error"></span>
                     <label for="password">Пароль</label>
-                    <input type="password" id="password" placeholder="Введите пароль" required>
-                    <span class="error-message-password" id="password-error"></span>
+                    <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+                    <span class="error-message-login-password" id="password-error"></span>
+                    <div class="error-message-auth display-none" id="auth-error">Неверный логин или пароль</div>
                     <div class="button-container">
                       <div class="auth-form-button" id = "submit-button" type="submit">Войти</div>
                       <a class="auth-form-register" href="#" onclick = "toggleRegistrationModal()">Зарегистрироваться</a>
@@ -55,29 +73,31 @@
                   <div class="auth-modal-content">
                     <span class="close" onclick="closeRegistrationModal()"><img src="images/close.png"></span>
                     <h2 id = "nameOfModalWindow">Регистрация</h2>
-                    <form class="auth-form" method="post">
+                    <form class="auth-form" id="registration-form" method="post">
                       <label for="reg-login">Имя пользователя</label>
-                      <input type="text" id="reg-login" placeholder="Введите логин" required>
+                      <input type="text" id="reg-login" name="reg-login" placeholder="Введите логин" required>
                       <span class="error-message-login" id="reg-login-error"></span>
 
                       <label for="email">E-mail</label>
-                      <input type="text" id="email" placeholder="Введите e-mail" required>
+                      <input type="text" id="email" name="email" placeholder="Введите e-mail" required>
                       <span class="error-message-email" id="error-message-email"></span>
 
                       <label for="reg-password">Пароль</label>
-                      <input type="password" id="reg-password" placeholder="Введите пароль" required>
+                      <input type="password" id="reg-password" name="reg-password" placeholder="Введите пароль" required>
                       <span class="error-message-password" id="reg-password-error"></span>
                       
                       <label for="repeat-password">Повторите пароль</label>
-                      <input type="password" id="repeat-password" placeholder="Повторите пароль" required>
+                      <input type="password" id="repeat-password" name="repeat-password" placeholder="Повторите пароль" required>
                       <span class="error-message-password" id="reg-repeat-password-error"></span>
 
 
                       <div class="button-container">
-                        <div class="auth-form-button" id = "registration-button" type="submit">Зарегистрироваться</div>
+                        <div class="auth-form-button" id = "registration-button" type="submit" >Зарегистрироваться</div>
                         <a class="auth-form-register" href="#" onclick = "toggleRegistrationModal()">Уже есть аккаунт? Войти.</a>
                       </div>
                     </form>
+                    <div class="success-message-registration display-none" id="registration-success">Регистрация прошла успешно!</div>
+                    <div class="error-message-registration display-none" id="registration-error">Пользователь с таким логином уже зарегистрирован!</div>
                   </div>
 
               </div>
@@ -88,7 +108,7 @@
       </div>
       <div class="headerBottom">
         <div class="main-contain">
-          <a href="index.html">
+          <a href="index.php">
             <img
               src="images/full-logo.png"
               alt="ДомМаркет логотип"
@@ -242,7 +262,7 @@
                 </a>
               </div>
               <div class="block house">
-                <a href="page.html">
+                <a href="properties.php">
                   <div class="block-content">Купить частный дом</div>
                   <div class="count">1000 коттеджей</div>
                 </a>
@@ -368,7 +388,9 @@
   <script src="scriptsJS/modalAuthWindow.js"></script>
   <script src="scriptsJS/modalRegWindow.js"></script>
   <script src="scriptsJS/authFormValidate.js"></script>
-  <script src="scriptsJS/regFormValidate.js"
+  <script src="scriptsJS/regFormValidate.js"></script>
+  <script src="scriptsJS/toggleUserModal.js"></script>
   <script src="scriptsJS/sliderMain.js"></script>
+  <script src="scriptsJS/authSupport.js"></script>
   </body>
 </html>

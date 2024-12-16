@@ -2,7 +2,6 @@ $(document).ready(function() {
     const $login = $('#login');
     const $password = $('#password');
 
-
     $('#login-error').hide();
     $('#password-error').hide();
     let usernameError = true;
@@ -11,7 +10,6 @@ $(document).ready(function() {
     });
 
     function validateUsername(username, errorField) {
-
         if (!username.val().trim()) {
             usernameError = false;
             $(errorField).text('Введите логин').show();
@@ -57,10 +55,37 @@ $(document).ready(function() {
     });
 
     $('#submit-button').click(function() {
-        validateUsername();
-        validatePassword();
+        console.log($login);
+        validateUsername($login, '#login-error');
+        validatePassword($password);
         if (usernameError && passwordError) {
+            console.log($login.val());
+            console.log($password.val());
             console.log('Форма валидна');
+            $.ajax({
+                url: 'src/login.php',
+                type: 'POST',
+                data: {
+                    login: $login.val(),
+                    password: $password.val()
+                },
+                
+                success: function(response) {
+                    if (response.trim() === "success") {
+                        window.location.reload();
+                        const userTextElement = document.getElementById('user-text');
+                        userTextElement.textContent = $login.val();
+
+                    } else {
+                        $('#auth-error').removeClass('display-none');
+                        $login.css('border-color', 'red');
+                        $password.css('border-color', 'red');
+                    }
+                },
+                error: function() {
+                    $('#auth-error').removeClass('display-none');
+                }
+            });
             return true;
         } else {
             alert('Проверьте правильность введенных данных');

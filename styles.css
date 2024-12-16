@@ -53,7 +53,7 @@ body {
 .socials .youtube{
   filter: brightness(120%);
 }
-.socials .vk:hover, .socials .youtube:hover, .user img:hover{
+.socials .vk:hover, .socials .youtube:hover, .user:hover{
     scale: 1.01;
     transition: 100ms;
     cursor: pointer;
@@ -67,8 +67,16 @@ body {
 
 .user {
   margin-right: 20rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .header-menu-up a {
+  font-size: 14px;
+  text-decoration: none;
+  color: #000;
+}
+.user-text {
   font-size: 14px;
   text-decoration: none;
   color: #000;
@@ -178,7 +186,7 @@ body {
   font-size: 16px;
   margin-bottom: 5px;
   line-height: 22px;
-  color: #b3b3b3;
+  color: #f1f1f1;
   margin-bottom: 24px;
 }
 .main-contain {
@@ -415,6 +423,13 @@ body {
     color: #333;
     margin-bottom: 32px;
 }
+.main-bodyBottom-Content-count{
+  font-weight: bold;
+    font-size: 20px;
+    line-height: 36px;
+    color: #333;
+    margin-bottom: 32px;
+}
 .categories{
   margin-bottom: 48px;
   box-sizing: border-box;
@@ -544,5 +559,144 @@ footer {
   justify-content: space-between;
   font-weight: bold;
 }
+
+
+.clear-list{
+  display: flex;
+  list-style-type: none;
+  border-bottom: 1px solid #EBEBEB;
+}
+.vertical-margin{
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.realty-container{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 32px;
+  border: 1px solid #EBEBEB;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.realty-image-container{
+  border-radius: 12px;
+  overflow: hidden;
+}
+.realty-image-container img{
+  width: 450px;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.realty-content-container{
+  padding: 16px;
+}
+.realty-content-container .realty-title{
+  width: 500px;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 30px;
+  color: #333;
+}
+.realty-text-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+.realty-text-container .realty-price{
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 30px;
+  color: #39c568;
+}
+.realty-info-container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+.realty-info-container > ul{
+  margin-bottom: 16px;
+}
+.realty-info{
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  gap: 46px;
+}
+.realty-additional-info{
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
+.realty-additional-info .realty-additional-info-item-label{
+  font-size: 18px;
+  color: #808080;
+}
+.realty-additional-info .realty-additional-info-item-value{
+  font-size: 20px;
+  color: #00d0f5;
+}
+.realty-info-item .realty-info-item-label{
+  font-size: 18px;
+  color: #808080;
+}
+.realty-info-item .realty-info-item-value{
+  font-size: 20px;
+  color: #333;
+}
+.realty-info-button{
+  margin-top: 58px;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+.realty-info-button-item{
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+}
+.realty-info-button-item a{
+  text-decoration: none;
+  color: #333;
+  border-radius: 12px;
+  padding: 12px 16px;
+  transition: 100ms;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.realty-info-button-item.additional-info a{
+  background-color: #fff;
+  border: 1px solid #333;
+}
+.realty-info-button-item.additional-info a:hover{
+  background-color: #333;
+  color: #fff;
+  transition: 100ms;
+}
+
+.realty-info-button-item.view a{
+  color: #fff;
+  background-color: #00d0f5;
+  border: 1px solid #00d0f5;
+}
+.realty-info-button-item.view a:hover{
+  background-color: #FFF;
+  color: #00d0f5;
+  transition: 100ms;
+}
+.realty-info-button-item.booking a{
+  color: #fff;
+  background-color: #39c568;
+  border: 1px solid #39c568;
+}
+.realty-info-button-item.booking a:hover{
+  background-color: #FFF;
+  color: #39c568;
+  transition: 100ms;
+}
+
 
 
