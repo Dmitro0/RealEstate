@@ -20,15 +20,19 @@
 .userModalWindow{
     position: absolute;
     padding: 10px 20px;
-    top: 32px;
-    right: 195px;
-    width: 100px;
+    top: 28px;
+    right: 150px;
+    width: 200px;
     z-index: -1;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-
+.user-modal-content{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
 
 .modalWindow[style*="z-index: 9999"] {
     transform: translate(-50%, -80%) scale(1);
@@ -39,35 +43,79 @@
     opacity: 1;
 }
 
-.logout-button{
+.profile-button{
+    width: 90px;
     cursor: pointer;
     background-color: #39c568;
+    color: #fff;
+    border: 1px solid #39c568;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 12px;
+}
+.logout-button{
+    width: 90px;
+    cursor: pointer;
+    background-color: #ff5353;
+    color: #fff;
+    border: 1px solid #ff5353;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 12px;
+    transition: 100ms;
+}
+.profile-button:hover{
+    background-color: #fff;
+    border: 1px solid #39c568;
+    color: #39c568;
+    transition: 100ms;
+}
+.logout-button:hover{
+    background-color: #fff;
+    border: 1px solid #ff5353;
+    color: #ff5353;
+    transition: 100ms;
+}
+.modalWindow > * , .viewModal > * {
+    margin: 10px 0;
+}
+.modalWindow h2, .viewModal h2{
+    color: #333;
+    font-size: 20px;
+    font-weight: 750;
+    margin-left: 10px;
+}
+.modalWindow .close img, .userModalWindow .close img, .viewModal .close img {
+    width: 20px;
+    height: 20px;
+    transition: 100ms;
+}
+#bookingModal h2{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+#booking-cancel-btn{
+    font-size: 16px;
+}
+.cancel-btn{
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #ff5353;
     color: #fff;
     border-radius: 8px;
     padding: 10px 15px;
     font-size: 12px;
     transition: 100ms;
 }
-.logout-button:hover{
-    background-color: #ff5353;
+.cancel-btn:hover{
+    font-size: 16px;
+    background-color: #fff;
+    border: 1px solid #ff5353;
+    color: #ff5353;
     scale: 1.02;
     transition: 100ms;
 }
-.modalWindow > * {
-    margin: 10px 0;
-}
-.modalWindow h2{
-    color: #333;
-    font-size: 20px;
-    font-weight: 750;
-    margin-left: 10px;
-}
-.modalWindow .close img, .userModalWindow .close img {
-    width: 20px;
-    height: 20px;
-    transition: 100ms;
-}
-.auth-modal-content .close:hover {
+.auth-modal-content .close:hover, .modal-content .close:hover {
     scale: 1.1;
     cursor: pointer;
     transition: 100ms;
@@ -79,7 +127,7 @@
 .auth-form {
     display: block;
 }
-.auth-form label {
+.auth-form label, .form-group label {
     text-align: left;
     margin-left: 5px;
     margin-top: 0px;
@@ -88,7 +136,7 @@
     font-weight: 500;
     color: #333;
 }
-.auth-form input {
+.auth-form input, .form-group input {
     width: 100%;
     padding: 10px;
     margin: 5px 0px 10px 0px;
@@ -96,25 +144,26 @@
     border-radius: 5px;
     outline: none;
 }
-.auth-form input:focus {
+.auth-form input:focus, .form-group input:focus {
     border-color: #39c568;
     box-shadow: 0 0 0 2px rgba(57, 197, 104, 0.1);
 }
 .button-container {
     text-align: center;
 }
-.auth-form-button {
+.auth-form-button, .submit-btn {
     cursor: pointer;
     background-color: #39c568;
     color: #fff;
     border-radius: 8px;
     padding: 10px 40px;
-    font-size: 15px;
+    font-size: 16px;
     transition: 100ms;
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.auth-form-button:hover {
+
+.auth-form-button:hover, .submit-btn:hover {
     background-color: #53ff8d;
     scale: 1.02;
     transition: 100ms;
@@ -150,7 +199,7 @@ a.auth-form-register:hover {
     right: 20px;
 }
 .error-message-login-password {
-    top: 195px;
+    top: 190px;
     right: 20px;
 }
 .error-message-email{

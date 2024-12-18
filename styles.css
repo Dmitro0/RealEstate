@@ -284,10 +284,7 @@ body {
   max-width: 175px;
   margin-right: 16px;
 }
-.filter-form .filter-item-reset{
-  flex-basis: 100px;
-  max-width: 100px;
-}
+
 
 .hide-select{
   position: relative;
@@ -376,6 +373,7 @@ body {
 
 .show-button {
   padding: 14px;
+  text-decoration: none;
   background-color: #39c568;
   color: white;
   transition: 100ms;
@@ -499,6 +497,7 @@ body {
 
 
 .main-bodyBottomInfo {
+  width: 100%;
   background-color: #f1f1f1;
 }
 .main-bodyBottomInfo .list-container{
@@ -552,6 +551,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
+  width: 100%;
 }
 
 .footer-info {
@@ -698,5 +698,34 @@ footer {
   transition: 100ms;
 }
 
+.main-about-text{
+  font-size: 16px;
+  line-height: 26px;
+  color: #505050;
+}
 
+.main-about-text-container{
+  flex-grow: 1;
+  flex-basis: 75%;
+  margin-right: 32px;
+}
 
+.favourite-button{
+  cursor: pointer;
+  position: relative;
+  top: 20px;
+  right: -1150px;
+  transition: 100ms;
+}
+.favourite-button.active{
+  color: #fe5858;
+}
+.favourite-button:hover{
+  color: #fe5858;
+  transition: 100ms;
+}
+.filter-buttons{
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
