@@ -152,11 +152,11 @@ body {
   opacity: 0;
   left: 0;
   top: 100%;
-  transition: all .3s ease .15s;
   z-index: 99;
   background: #fff;
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+  transition: 100ms;
   width: 1170px;
 }
 
@@ -426,7 +426,6 @@ body {
     font-size: 20px;
     line-height: 36px;
     color: #333;
-    margin-bottom: 32px;
 }
 .categories{
   margin-bottom: 48px;
@@ -728,4 +727,104 @@ footer {
   display: flex;
   flex-direction: row;
   gap: 16px;
+}
+
+.results-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16 0px;
+}
+
+.sort-container {
+    margin-right: 20px;
+}
+
+.sort-select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.sort-select:hover {
+    border-color: #39c568;
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: #39c568;
+    box-shadow: 0 0 0 2px rgba(57, 197, 104, 0.2);
+}
+.realty-buttons-container{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.admin-controls {
+    position:relative;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-button {
+    text-align: center;
+    max-height: 40px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: none;
+    color: white;
+}
+
+.edit-button {
+    background-color: #2196F3;
+    border: 1px solid #2196F3;
+}
+
+.edit-button:hover {
+    background-color: #fff;
+    color: #2196F3;
+}
+
+.save-button {
+    background-color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.save-button:hover {
+    background-color: #fff;
+    color: #4CAF50;
+}
+
+.delete-button {
+    background-color: #f44336;
+    border: 1px solid #f44336;
+}
+
+.delete-button:hover {
+    background-color: #fff;
+    color: #f44336;
+}
+
+[contenteditable].editing {
+    padding: 2px;
+    border: 1px solid #2196F3;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+[contenteditable].editing:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
 }

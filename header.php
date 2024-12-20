@@ -7,9 +7,9 @@
             </div>
 
             <ul class="header-menu-up">
-                <li class="item"><a href="index.php">Услуги</a></li>
-                <li class="item"><a href="index.php">О компании</a></li>
-                <li class="item"><a href="index.php">Контакты</a></li>
+                <li class="item"><a href="index.php#services">Услуги</a></li>
+                <li class="item"><a href="index.php#main-about">О компании</a></li>
+                <li class="item"><a href="index.php#contacts">Контакты</a></li>
                 <li>
                     <?php if ($auth): ?>
                         <div class="user" onclick="toggleUserModal()">
@@ -104,39 +104,35 @@
                 <li class="header-menu-item sale"><a href="#">Продажа</a>
                     <div class="hidden-menu">
                         <ul class="header-menu sale">
-                            <li class="header-menu-item"><a href="#">Купить квартиру</a></li>
-                            <li class="header-menu-item"><a href="#">Купить дом</a></li>
-                            <li class="header-menu-item"><a href="#">Купить участок</a></li>
+                            <li class="header-menu-item"><a href="properties.php?type=flat">Купить квартиру</a></li>
+                            <li class="header-menu-item"><a href="properties.php?type=house">Купить дом</a></li>
+                            <li class="header-menu-item"><a href="properties.php?type=project">Купить проект</a></li>
                         </ul>
                     </div>
                 </li>
                 <li class="header-menu-item new-buildings"><a href="#">Новостройки</a>
                     <div class="hidden-menu">
                         <ul class="header-menu new-buildings">
-                            <li class="header-menu-item"><a href="#">Экслюзивно на нашем сайте</a></li>
-                            <li class="header-menu-item"><a href="#">Выгодные предложения</a></li>
-                            <li class="header-menu-item"><a href="#">Новостройки в ипотеку</a></li>
+                            <li class="header-menu-item"><a href="properties.php">Экслюзивно на нашем сайте</a></li>
+                            <li class="header-menu-item"><a href="properties.php">Выгодные предложения</a></li>
                         </ul>
                     </div>
                 </li>
                 <li class="header-menu-item city"><a href="#">Городская</a>
                     <div class="hidden-menu">
                         <ul class="header-menu city">
-                            <li class="header-menu-item"><a href="#">Жилые комплексы</a></li>
-                            <li class="header-menu-item"><a href="#">Новостройки</a></li>
-                            <li class="header-menu-item"><a href="#">Проекты</a></li>
-                            <li class="header-menu-item"><a href="#">Строительные компании</a></li>
+                            <li class="header-menu-item"><a href="properties.php?type=flat">Жилые комплексы</a></li>
+                            <li class="header-menu-item"><a href="properties.php?type=flat">Новостройки</a></li>
+                            <li class="header-menu-item"><a href="properties.php?type=project">Проекты</a></li>
                         </ul>
                     </div>
                 </li>
                 <li class="header-menu-item country"><a href="#">Загородная</a>
                     <div class="hidden-menu">
                         <ul class="header-menu country">
-                            <li class="header-menu-item"><a href="#">Коттеджные поселки</a></li>
-                            <li class="header-menu-item"><a href="#">Коттеджи</a></li>
-                            <li class="header-menu-item"><a href="#">Пентхаусы</a></li>
-                            <li class="header-menu-item"><a href="#">Таунхаусы</a></li>
-                            <li class="header-menu-item"><a href="#">Участки</a></li>
+                            <li class="header-menu-item"><a href="properties.php?type=house">Коттеджи</a></li>
+                            <li class="header-menu-item"><a href="properties.php?type=house">Пентхаусы</a></li>
+                            <li class="header-menu-item"><a href="properties.php?type=house">Таунхаусы</a></li>
                         </ul>
                     </div>
                 </li>

@@ -8,6 +8,7 @@ function bookingModal(realtyId) {
             document.getElementById('realty-id').value = realtyId;
         }
     }
+    return false;
 }
 
 function bookingCancel() {

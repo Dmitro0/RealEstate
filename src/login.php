@@ -1,6 +1,7 @@
 <?php
 require_once 'boot.php';
 require_once 'helper.php';
+require_once 'cookie_handler.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['login'];
@@ -20,11 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['username'] = $result['login'];
         $_SESSION['user_role'] = $result['userrole'];
         $_SESSION['logged_in'] = true;
+        setCookies($result['id'], $result['login'], $result['userrole']);
             
         echo "success";
     } else {
         echo "error";
     }
-
 }
 ?>

@@ -148,7 +148,7 @@ try {
                                             <h3><?php echo htmlspecialchars($favourite['name']); ?></h3>
                                             <p class="price"><?php echo number_format((float)$favourite['costrealty'], 2, '.', ' '); ?>₽</p>
                                             <p class="area">Площадь: <?php echo htmlspecialchars($favourite['area']); ?> м²</p>
-                                            <p class="address">Адрес: <?php echo htmlspecialchars($favourite['adress']); ?></p>
+                                            <p class="address">Адрес: <?php echo !empty($favourite['adress']) ? htmlspecialchars($favourite['adress']) : 'На вашем участке'; ?></p>
                                         </div>
                                         <div class="property-actions">
                                             <div class="action-button remove-button" onclick="removeFavourite(<?php echo $favourite['id']; ?>)">

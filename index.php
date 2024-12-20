@@ -103,82 +103,75 @@ $auth = checkAuth();
         </div>
 
         <div class="main-contain">
-          <p class="main-bodyBottom-Content">Виды недвижимости</p>
+          <p class="main-bodyBottom-Content" id="services">Виды недвижимости</p>
           <div class="categories">
             <div class="front-block">
               <div class="block flat">
                 <a href="properties.php?type=flat">
                   <div class="block-content">Купить квартиру</div>
-                  <div class="count">2500 квартир</div>
+                  <div class="count"><?php
+                        $conn = getDbConnection();
+                        $stmt = $conn->query("SELECT COUNT(*) FROM \"Realty\" where typeRealty = 'Квартира'");
+                        echo $stmt->fetchColumn();
+                    ?> квартиры</div>
                 </a>
               </div>
               <div class="block house">
                 <a href="properties.php?type=house">
                   <div class="block-content">Купить частный дом</div>
-                  <div class="count">1000 коттеджей</div>
+                  <div class="count"><?php
+                        $conn = getDbConnection();
+                        $stmt = $conn->query("SELECT COUNT(*) FROM \"Realty\" where typeRealty = 'Частный дом'");
+                        echo $stmt->fetchColumn();
+                    ?>  коттеджа</div>
                 </a>
               </div>
               <div class="block project">
                 <a href="properties.php?type=project">
                   <div class="block-content">Будущие проекты в мире недвижимости</div>
-                  <div class="count">100 проектов</div>
+                  <div class="count"><?php
+                        $conn = getDbConnection();
+                        $stmt = $conn->query("SELECT COUNT(*) FROM \"Realty\" where typeRealty = 'Проект'");
+                        echo $stmt->fetchColumn();
+                    ?>  проекта</div>
                 </a>
               </div>
             </div>
 
             <div class="actual-slider">
-            <p class = "main-bodyBottom-Content">Актульные предложения</p>
-            <button class="slider-button prev" onclick="moveSlide(-1)"><img src="images/chevron_left.png"></button>
-            <button class="slider-button next" onclick="moveSlide(1)"><img src="images/chevron_right.png"></button>
-            <div class="slider-container">
-              <div class="slider">
-                <div class="slide">
-                  <img src="images/house1.jpg" alt="Дом 1">
-                  <div class="slide-content">
-                    <div class="slide-price">15 500 000 ₽</div>
-                    <div class="slide-details">
-                      <p>Площадь: 173 м²</p>
-                      <p>Район: Щаповское поселение, г. Москва</p>
+                <p class="main-bodyBottom-Content">Актуальные предложения</p>
+                <button class="slider-button prev" onclick="moveSlide(-1)"><img src="images/chevron_left.png"></button>
+                <button class="slider-button next" onclick="moveSlide(1)"><img src="images/chevron_right.png"></button>
+                <div class="slider-container">
+                    <div class="slider">
+                        <?php
+                        try {
+                            $stmt = $conn->prepare('SELECT id, name, images, costrealty, area, adress FROM "Realty" WHERE actual = 2 ORDER BY id DESC LIMIT 4');
+                            $stmt->execute();
+                            $actualProperties = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach ($actualProperties as $property) {
+                                ?>
+                                <div class="slide">
+                                    <img src="<?php echo htmlspecialchars($property['images']); ?>" alt="<?php echo htmlspecialchars($property['name']); ?>">
+                                    <div class="slide-content">
+                                        <div class="slide-price"><?php echo number_format($property['costrealty'], 0, ',', ' '); ?> ₽</div>
+                                        <div class="slide-details">
+                                            <p>Площадь: <?php echo htmlspecialchars($property['area']); ?> м²</p>
+                                            <p>Район: <?php echo htmlspecialchars($property['adress']); ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        } catch (PDOException $e) {
+                            echo "Ошибка при получении актуальных предложений: " . $e->getMessage();
+                        }
+                        ?>
                     </div>
-                  </div>
                 </div>
-                
-                <div class="slide">
-                  <img src="images/house2.jpg" alt="Дом 2">
-                  <div class="slide-content">
-                    <div class="slide-price">23 800 000 ₽</div>
-                    <div class="slide-details">
-                      <p>Площадь: 230 м²</p>
-                      <p>Район: г. Москва</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="slide">
-                  <img src="images/house3.jpg" alt="Дом 3">
-                  <div class="slide-content">
-                    <div class="slide-price">79 900 000 ₽</div>
-                    <div class="slide-details">
-                      <p>Площадь: 430 м²</p>
-                      <p>Район: поселок Крекшино, г. Москва</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="slide">
-                  <img src="images/house4.jpg" alt="Дом 4">
-                  <div class="slide-content">
-                    <div class="slide-price">168 000 000 ₽</div>
-                    <div class="slide-details">
-                      <p>Площадь: 552 м²</p>
-                      <p>Район: поселок Чистые ключи, г. Москва</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-          <div class="main-about">
+          <div class="main-about" id="main-about">
             <h2 class="main-bodyBottom-Content">О компании</h2>
             <div class="main-about-text-container">
               <p class="main-about-text">ДомМаркет — это крупнейший сервис по продаже и аренде недвижимости в России. Мы предлагаем широкий спектр услуг, включая поиск и бронирование объектов, консультации по недвижимости, а также помощь в оформлении сделок.</p>
@@ -224,7 +217,7 @@ $auth = checkAuth();
                 <ul class = "main-bodyBottomInfo-list">
                   <li><a href="#">Экслюзивно на нашем сайте</a></li>
                   <li><a href="#">Выгодные предложения</a></li>
-                  <li><a href="#">Новостройки в ип��теку</a></li>
+                  <li><a href="#">Новостройки в ипотеку</a></li>
                 </ul>
               </div>
             </div>

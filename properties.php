@@ -108,6 +108,17 @@ try {
         $sql .= ' WHERE ' . implode(' AND ', $conditions);
     }
 
+    if (isset($_GET['sort'])) {
+        switch($_GET['sort']) {
+            case 'asc':
+                $sql .= ' ORDER BY CAST(costrealty AS numeric) ASC';
+                break;
+            case 'desc':
+                $sql .= ' ORDER BY CAST(costrealty AS numeric) DESC';
+                break;
+        }
+    }
+
     $stmt = $conn->prepare($sql);
     foreach ($params as $key => $value) {
         $stmt->bindValue($key, $value);
@@ -122,14 +133,23 @@ try {
         <div class="main-contain">
             <h2 class="main-bodyBottom-Content vertical-margin"><?php echo !empty($title) ? $title : 'Вся недвижимость'; ?></h2>
             <ul class="clear-list"></ul>
-            <h3 class="main-bodyBottom-Content-count vertical-margin">
-                Выведено результатов: <?php echo $total_properties; ?>
-            </h3>
+            <div class="results-container">
+                <h3 class="main-bodyBottom-Content-count">
+                    Выведено результатов: <?php echo $total_properties; ?>
+                </h3>
+                <div class="sort-container">
+                    <select class="sort-select" id="price-sort" onchange="applySorting(this.value)">
+                        <option value="">Сортировка по цене</option>
+                        <option value="asc">По возрастанию цены</option>
+                        <option value="desc">По убыванию цены</option>
+                    </select>
+                </div>
+            </div>
 
             <?php
             foreach ($properties as $property) {
                 ?>
-                <div class="realty-container">
+                <div class="realty-container" data-realty-id="<?php echo $property['id']; ?>">
                     <div class="favourite-button <?php 
                         if(isset($_SESSION['username'])) {
                             $checkFav = $conn->prepare("SELECT customer, realty FROM \"Favourites\" WHERE customer = :customer AND realty = :realty");
@@ -157,47 +177,69 @@ try {
                             <ul class="realty-info">
                                 <li class="realty-info-item">
                                     <div class="realty-info-item-label">Площадь</div>
-                                    <div class="realty-info-item-value"><?php echo htmlspecialchars($property['area']); ?> кв.м</div>
+                                    <div class="realty-info-item-value area-value"><?php echo htmlspecialchars($property['area']); ?> м²</div>
                                 </li>
                                 <li class="realty-info-item">
                                     <div class="realty-info-item-label">Комнаты</div>
-                                    <div class="realty-info-item-value"><?php echo htmlspecialchars($property['rooms']); ?> комнаты</div>
+                                    <div class="realty-info-item-value rooms-value"><?php echo htmlspecialchars($property['rooms']); ?></div>
                                 </li>
                                 <li class="realty-info-item">
-                                    <div class="realty-info-item-label">Этаж</div>
-                                    <div class="realty-info-item-value"><?php echo htmlspecialchars($property['floors']); ?> этажей</div>
+                                    <div class="realty-info-item-label">Этаж<?php echo ($property['plotarea'] ? 'ей' : ''); ?></div>
+                                    <div class="realty-info-item-value floors-value"><?php echo htmlspecialchars($property['floors']); ?></div>
                                 </li>
                                 <?php if (isset($property['plotarea']) && $property['plotarea'] !== null): ?>
                                     <li class="realty-info-item">
                                         <div class="realty-info-item-label">Участок</div>
-                                        <div class="realty-info-item-value"><?php echo htmlspecialchars($property['plotarea']); ?> соток</div>
+                                        <div class="realty-info-item-value plotarea-value"><?php echo htmlspecialchars($property['plotarea']); ?></div>
                                     </li>
                                 <?php endif; ?>
                             </ul>
                             <ul class="realty-additional-info">
-                                
                                 <li class="realty-additional-info-item">
                                     <div class="realty-additional-info-item-label">Адрес</div>
                                     <?php if (isset($property['adress']) && $property['adress'] !== null): ?>
-                                        <div class="realty-additional-info-item-value"><?php echo htmlspecialchars($property['adress']); ?></div>
+                                        <div class="realty-additional-info-item-value address-value"><?php echo htmlspecialchars($property['adress']); ?></div>
                                     <?php else: ?>
                                         <div class="realty-additional-info-item-value">Построим на вашем участке</div>
                                     <?php endif; ?>
                                 </li>
-                            </ul> 
+                            </ul>
+                            <div class="realty-buttons-container">
                             <ul class="realty-info-button">
                                 <li class="realty-info-button-item additional-info">
                                     <a href="#">Подробнее</a>
                                 </li>
                                 <li class="realty-info-button-item view">
-                                    <a href="#" onclick="viewModal(<?php echo $property['id']; ?>)">Просмотр</a>
+                                    <a href="javascript:void(0)" onclick="viewModal(<?php echo $property['id']; ?>)">Просмотр</a>
                                 </li>
                                 <li class="realty-info-button-item booking">
-                                    <a href="#" onclick="bookingModal(<?php echo $property['id']; ?>)">Забронировать</a>
+                                    <a href="javascript:void(0)" onclick="bookingModal(<?php echo $property['id']; ?>)">Забронировать</a>
                                 </li>
-                            </ul>
+                                </ul>
+                                <?php if (isset($_SESSION['user_id'])): 
+                        $stmt = $conn->prepare('SELECT userrole FROM "Users" WHERE id = :user_id');
+                        $stmt->bindParam(':user_id', $_SESSION['user_id']);
+                        $stmt->execute();
+                        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                        
+                        if ($user['userrole'] == 2): ?>
+                            <div class="admin-controls">
+                                <div class="admin-button edit-button" onclick="makeEditable(this.closest('.realty-container').querySelector('.realty-content-container'))">
+                                    Редактировать
+                                </div>
+                                <div class="admin-button save-button" onclick="saveChanges(<?php echo $property['id']; ?>)">
+                                    Сохранить
+                                </div>
+                                <div class="admin-button delete-button" onclick="deleteRealty(<?php echo $property['id']; ?>)">
+                                    Удалить
+                                </div>
+                            </div>
+                        <?php endif; 
+                    endif; ?>
+                            </div>
                         </div>
                     </div>
+                   
                 </div>
                 <?php
             }
@@ -257,4 +299,6 @@ try {
   <script src="scriptsJS/viewModalValidate.js"></script>
   <script src="scriptsJS/bookingModal.js"></script>
   <script src="scriptsJS/profile.js"></script>
+  <script src="scriptsJS/sorting.js"></script>
+  <script src="scriptsJS/adminRealty.js"></script>
 </html>
