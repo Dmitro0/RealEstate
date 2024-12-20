@@ -6,4 +6,5 @@
             <p>Адрес: ул. Гагарина, 59</p>
         </div>
     </div>
-</footer> 
+</footer>
+<script src="scriptsJS/callModalValidate.js"></script>

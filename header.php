@@ -49,6 +49,28 @@
                         </div>
                     </div>
 
+    <div id = "callback" class = "modalWindow">
+        <div class="modal-content">
+            <span class="close" onclick="callbackModal()"><img src="images/close.png"></span>
+            <h2>Связаться со мной</h2>
+            <form id="callForm" method="POST">
+                <input type="hidden" id="call-customer" name="customer" value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>">
+                <input type="hidden" id="call-realty" name="realty" value="">
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="call-name" name="name" placeholder="Введите ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Номер телефона</label>
+                    <input type="tel" id="call-phone" name="phone" placeholder="Введите ваш номер телефона" required>
+                </div>
+                <div class="button-container">
+                    <div class="submit-btn" id="call-submit-btn" type="submit">Отправить заявку</div>
+                </div>
+            </form>
+        </div>
+    </div>
+
                     <div id="registrationModal" class="modalWindow">
                         <div class="auth-modal-content">
                             <span class="close" onclick="closeRegistrationModal()"><img src="images/close.png"></span>
@@ -90,17 +112,6 @@
             </a>
             
             <ul class="header-menu-bottom">
-                <li class="header-menu-item rent"><a href="#">Аренда</a>
-                    <div class="hidden-menu">
-                        <ul class="header-menu rent">
-                            <li class="header-menu-item"><a href="#">Снять квартиру</a></li>
-                            <li class="header-menu-item"><a href="#">Снять дом</a></li>
-                            <li class="header-menu-item"><a href="#">Снять участок</a></li>
-                            <li class="header-menu-item"><a href="#">Снять коммерческую</a></li>
-                            <li class="header-menu-item"><a href="#">Снять офис</a></li>
-                        </ul>
-                    </div>
-                </li>
                 <li class="header-menu-item sale"><a href="#">Продажа</a>
                     <div class="hidden-menu">
                         <ul class="header-menu sale">
@@ -136,7 +147,7 @@
                         </ul>
                     </div>
                 </li>
-                <li><div class="button-call">Позвоните мне</div></li>
+                <li><div class="button-call" onclick = "callbackModal()">Позвоните мне</div></li>
             </ul>
         </div>
     </div>

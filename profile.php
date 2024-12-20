@@ -173,5 +173,6 @@ try {
     <script src="scriptsJS/authSupport.js"></script>
     <script src="scriptsJS/profile.js"></script>
     <script src="scriptsJS/acceptModal.js"></script>
+    <script src="scriptsJS/viewModal.js"></script>
 </body>
 </html>

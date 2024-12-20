@@ -55,6 +55,10 @@ $auth = checkAuth();
                         <option value="6">6</option>
                         <option value="7">7</option>
                         <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
                       </select>
                   </div>
                   <div class="filter-item-input price">
@@ -235,5 +239,6 @@ $auth = checkAuth();
   <script src="scriptsJS/sliderMain.js"></script>
   <script src="scriptsJS/authSupport.js"></script>
   <script src="scriptsJS/filter.js"></script>
+  <script src="scriptsJS/viewModal.js"></script>
   </body>
 </html>
